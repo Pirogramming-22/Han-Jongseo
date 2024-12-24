@@ -69,7 +69,7 @@
         * {
             box-sizing: border-box;
         }
-        html, body {
+        html, body, form {
             margin: 0;
             padding: 0;
         }
@@ -84,8 +84,9 @@
         #header {
             text-align: left;
             position: relative;
+            height: 64px;
         }
-        #header-hamburger, #header-notice, #header-shop {
+        #header-hamburger, #header-naverpay, #header-talk, #header-notice, #header-shop {
             position: absolute;
             top: 18px;
             padding: 10px;
@@ -93,8 +94,9 @@
             background: none;
             border: none;
             cursor: pointer;
+            padding: 8px;
         }
-        #header-hamburger:hover::before, #header-notice:hover::before, #header-shop:hover::before {
+        #header-hamburger:hover::before, #header-naverpay:hover::before, #header-talk:hover::before, #header-notice:hover::before, #header-shop:hover::before {
             position: absolute;
             content: '';
             z-index: 0;
@@ -105,7 +107,7 @@
             border-radius: 50%;
             background-color: #e7eced;
         }
-        #header-hamburger > div, #header-notice > div, #header-shop > div {
+        #header-hamburger > div, #header-naverpay > div, #header-talk > div, #header-notice > div, #header-shop > div {
             background-image: url(./sp_main.png);
             width: 32px;
             height: 32px;
@@ -120,12 +122,22 @@
         #header-hamburger > div {
             background-position: -311px -166px;
         }
+        #header-naverpay {
+            left: 42px;
+        }
+        #header-naverpay > div {
+            background-position: -248px -260px; 
+        }
+        #header-talk {
+            right: 92px;
+        }
+        #header-talk > div {
+            background-position: -99px -316px; 
+        }
         #header-notice {
             right: 42px;
-            padding: 10px 8px;
         }
         #header-notice > div {
-            width: 30px;
             background-position: -311px -232px;
         }
         #header-shop {
@@ -157,6 +169,18 @@
                     <span class="blind">확장 영역</span>
                     <!-- ::after -->
                 </button>
+                <button id="header-naverpay">
+                    <!-- ::before -->
+                    <div></div> <!-- 위 아래 셋이 형제, 끼리만 z-index 적용됨 -->
+                    <span class="blind">페이 바로가기</span>
+                    <!-- ::after -->
+                </button>
+                <button id="header-talk">
+                    <!-- ::before -->
+                    <div></div> <!-- 위 아래 셋이 형제, 끼리만 z-index 적용됨 -->
+                    <span class="blind">톡</span>
+                    <!-- ::after -->
+                </button>
                 <button id="header-notice">
                     <!-- ::before -->
                     <div></div> <!-- 위 아래 셋이 형제, 끼리만 z-index 적용됨 -->
@@ -170,7 +194,30 @@
                     <!-- ::after -->
                 </button>
             </div>
-            <div id="search"></div>
+            <style>
+                #search > form {
+                    display: inline-block;
+                    width: 708px;
+                    height: 60px;
+                    border: 1px solid #03c75a;
+                    border-radius: 33px;
+                    text-align: left;
+                }
+                #search > form > input {
+                    width: 480px;
+                    height: 100%;
+                    padding: 17px 0;
+                    border: none;
+                    outline: none;
+                }
+            </style>
+            <div id="search">
+                <form action="">
+                    <label for="search-input" class="blind">검색어 입력</label>
+                    <input id="search-input" type="text" />
+                    <button class="blind">검색</button>
+                </form>
+            </div>
             <div id="nav"></div>
             <div id="main"></div>
         </div>
