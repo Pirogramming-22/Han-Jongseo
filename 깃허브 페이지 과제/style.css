@@ -135,6 +135,9 @@ button:hover {
     padding: 0px 10px;
     margin-bottom: 10px;
 }
+#main-right input:focus {
+    background-color: rgb(230, 239, 255);
+}
 #main-right p {
     font-size: 11px;
     margin-bottom: 10px;
