@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+html, body {
+    font-size: 16px;
+    line-height: 10.5px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: -0.4px;
+    font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(41, 41, 41);
+}
+button {
+    display: flex;
+    justify-content: center;
+    color: white;
+    background: none;
+    border: none;
+}
+button:hover {
+    cursor: pointer;
+}
+#header {
+    flex: 1;
+}
+#nav {
+    display: flex;
+    margin: 20px 0px;
+    justify-content: space-around;
+    align-items: center;
+}
+#nav-left {
+    display: flex;
+    align-items: center;
+}
+#nav-logo {
+    background-color: rgb(41, 41, 41);
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+}
+#nav-logo svg {
+    fill: white;
+}
+#nav-left > svg {
+    position: relative;
+    margin-bottom: 20px;
+    vertical-align: middle;
+}
+#nav-right {
+    display: flex;
+    background-color: rgb(41, 41, 41);
+}
+#nav-right > input {
+    position: relative;
+    width: 200px;
+    height: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 0px 10px;
+    margin-right: 10px;
+}
+#Search {
+    border: 1px solid rgb(128, 125, 125);
+    background-color: rgb(128, 125, 125);
+    border-radius: 5px;
+}
+#Search-GitHub {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgb(128, 125, 125);
+}
+#Search-GitHub::placeholder {
+    color: white;
+}
+#Sign-in {
+    align-items: center;
+}
+#Sign-up {
+    border: 1px solid gray;
+    border-radius: 5px;
+    align-items: center;
+}
+#main {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: 300px;
+    margin: 0 auto;
+}
+#main-left {
+    flex: 1;
+    margin-top: -10px;
+    margin-left: 70px;
+}
+#main-left h1 {
+    color: white;
+    font-size: 60px;
+    line-height: 1;
+    margin-top: 100px;
+    margin-left: 50px;
+}
+#main-left p {
+    color: gray;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-top: -30px;
+    margin-left: 50px;
+}
+#main-left p span {
+    color: white;
+    text-decoration: underline;
+}
+#main-right {
+    flex: 0 0 400px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: white;
+    margin-top: -15px;
+    margin-right: 100px;
+    margin-bottom: 60px;
+}
+#main-right > input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+}
+#main-right p {
+    font-size: 11px;
+    margin-bottom: 10px;
+    line-height: 20px;
+}
+#text1 {
+    font-size: 14px;
+    margin-top: -10px;
+}
+#Sign-up-for-GitHub {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    background-color: rgb(17, 201, 17);
+    color: white;
+    align-items: center;
+}
+#footer {
+    text-align: center;
+    background-color: white;
+}
+#footer-image-section {
+    display: flex;
+    justify-content: flex-end;
+}
+#footer-image {
+    width: 500px;
+    height: 150px;
+    margin-top: -30px;
+    margin-right: 50px;
+}
