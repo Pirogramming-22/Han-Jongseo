@@ -1,0 +1,20 @@
+.responsive-image-container {
+    text-align: center;
+    margin: 20px;
+}
+
+.responsive-image {
+    width: 50%;
+}
+
+@media (max-width: 768px) {
+    .responsive-image {
+        width: 70%;
+    }
+}
+
+@media (max-width: 480px) {
+    .responsive-image {
+        width: 90%;
+    }
+}
