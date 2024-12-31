@@ -14,8 +14,8 @@
   --size-thumbnail: 50px;
   --font-size: 18px;
 
-  /* annimation */
-  --annimation-duration: 300ms;
+  /* animation */
+  --animation-duration: 300ms;
 }
 
 body {
@@ -29,7 +29,7 @@ body {
 
 .logo {
   cursor: pointer;
-  transition: transform var(--annimation-duration) ease;
+  transition: transform var(--animation-duration) ease;
 }
 
 .btn {
@@ -37,7 +37,7 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
-  transition: transform var(--annimation-duration) ease;
+  transition: transform var(--animation-duration) ease;
   margin-right: var(--base-space);
 }
 
