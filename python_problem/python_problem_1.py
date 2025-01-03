@@ -1,4 +1,5 @@
 num = 0
+player_flag = True
 
 while True: # 반복 조건 수정하기
   try:
@@ -8,10 +9,20 @@ while True: # 반복 조건 수정하기
       print("1,2,3 중 하나를 입력하세요")
       continue
 
-    for i in range(input_count):
-      num += 1
-      print("playerA : ", num)
-      
+    if player_flag:
+      for i in range(input_count):
+        num += 1
+        print("playerA : ", num)
+      player_flag = not player_flag
+      continue
+    
+    if not player_flag:
+      for i in range(input_count):
+        num += 1
+        print("playerB : ", num)
+      player_flag = not player_flag
+      continue
+
   except ValueError:
     print("정수를 입력하세요")
     continue
