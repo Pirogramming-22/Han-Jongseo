@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./reset.css">
+  <link rel="stylesheet" href="./style.css">
+  <title>스톱워치</title>
+</head>
+<body>
+  <main id="main">
+    <header id="header">⏰피로그래밍 스톱워치</header>
+    <section id="stopwatch_section">
+      <p id="time_section">00:00</p>
+      <button id="start_button">START</button>
+      <button id="stop_button">STOP</button>
+      <button id="reset_button">RESET</button>
+    </section>
+    <div id="record_header">
+      <input id="checkbox_all" type="checkbox">
+      <h2>구간 기록</h2>
+      <button id="delete_button">
+        <img src="./delete-bin-line.svg" alt="삭제">
+      </button>
+    </div>
+  </main>
+</body>
+<script src="./stopwatch.js"></script>
+</html>
