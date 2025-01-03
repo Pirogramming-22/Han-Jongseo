@@ -1,7 +1,7 @@
 num = 0
 player_flag = True
 
-while True: # 반복 조건 수정하기
+while num < 31:
   try:
     input_count = int(input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) :"))
 
