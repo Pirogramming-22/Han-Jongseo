@@ -21,6 +21,7 @@ def brGame():
       for i in range(input_count):
         num += 1
         if num == 31:
+          print("player : ", num)
           print("computer win!")
           return
         print("player : ", num)
@@ -28,6 +29,7 @@ def brGame():
       for i in range(random_number):
         num += 1
         if num == 31:
+          print("computer : ", num)
           print("player win!")
           return
         print("computer : ", num)
