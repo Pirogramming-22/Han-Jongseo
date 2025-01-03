@@ -1,7 +1,7 @@
 num = 0
 player_flag = True
 
-while num < 31:
+while True:
   try:
     input_count = int(input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) :"))
 
@@ -12,6 +12,9 @@ while num < 31:
     if player_flag:
       for i in range(input_count):
         num += 1
+        if num == 31:
+          print("playerA win!")
+          break
         print("playerA : ", num)
       player_flag = not player_flag
       continue
@@ -19,6 +22,9 @@ while num < 31:
     if not player_flag:
       for i in range(input_count):
         num += 1
+        if num == 31:
+          print("playerB win!")
+          break
         print("playerB : ", num)
       player_flag = not player_flag
       continue
