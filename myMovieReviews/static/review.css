@@ -1,0 +1,67 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+header a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.line {
+  display: block;
+  height: 0.1px;
+  background-color: #333;
+  padding: 2px;
+}
+
+.list-container {
+  display: flex;
+  width: 80%;
+  flex-wrap: nowrap;
+  gap: 40px;
+  padding: 20px;
+  margin: 20px auto;
+  overflow-x: auto;
+}
+
+.list-container a {
+  text-decoration: none;
+  color: black;
+}
+
+.list-item {
+  background-color: #e4e4e4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 210px;
+  height: 300px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.list-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.list-item-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.list-item-year,
+.list-item-jenre,
+.list-item-starrating {
+  font-size: 14px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.label {
+  color: gray;
+}

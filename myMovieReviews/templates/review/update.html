@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'update.css' %}">
+  <title>My Movie reviews</title>
+</head>
+<body>
+  <header>
+    <a href="{% url 'review:review' %}" style="text-decoration: none;">
+      my<span style="color: rgb(255, 100, 100);">Movie</span>reviews
+    </a>
+    <a href="{% url 'review:review_create' %}" style="text-decoration: none;">
+      Add a New review
+    </a>
+  </header>
+  <div class="line"></div>
+  <main>
+    <div class="form-container">
+      <div class="form-title"><span style="color: rgb(255, 100, 100);">Movie</span>review🍿</div>
+      <div class="line"></div>
+      <form action="{% url 'review:review_update' review.pk %}" method="post" onsubmit="return validateForm()">
+          {% csrf_token %}
+          <div>
+            <label for="title" class="form-label">제목:</label>
+            <input type="text" name="title" class="form-control" id="title" value="{{ review.title }}">
+          </div>
+          <div>
+            <label for="year" class="form-label">개봉년도:</label>
+            <input type="text" name="year" class="form-control" id="year" value="{{ review.year }}">
+          </div>
+          <div>
+            <label for="jenre" class="form-label">장르:</label>
+            <select name="jenre" id="jenre">
+              <option value="none" {% if review.jenre == "none" %}selected{% endif %}>----------</option>
+              <option value="action" {% if review.jenre == "action" %}selected{% endif %}>액션</option>
+              <option value="drama" {% if review.jenre == "drama" %}selected{% endif %}>드라마</option>
+              <option value="comedy" {% if review.jenre == "comedy" %}selected{% endif %}>코미디</option>
+              <option value="romance" {% if review.jenre == "romance" %}selected{% endif %}>로맨스</option>
+              <option value="horror" {% if review.jenre == "horror" %}selected{% endif %}>호러</option>
+              <option value="sf" {% if review.jenre == "sf" %}selected{% endif %}>SF</option>
+              <option value="fantasy" {% if review.jenre == "fantasy" %}selected{% endif %}>판타지</option>
+              <option value="thriller" {% if review.jenre == "thriller" %}selected{% endif %}>스릴러</option>
+              <option value="adventure" {% if review.jenre == "adventure" %}selected{% endif %}>어드벤쳐</option>
+              <option value="animation" {% if review.jenre == "animation" %}selected{% endif %}>애니메이션</option>
+              <option value="musical" {% if review.jenre == "musical" %}selected{% endif %}>뮤지컬</option>
+              <option value="crime" {% if review.jenre == "crime" %}selected{% endif %}>범죄</option>
+              <option value="documentary" {% if review.jenre == "documentary" %}selected{% endif %}>다큐멘터리</option>
+              <option value="family" {% if review.jenre == "family" %}selected{% endif %}>가족</option>
+            </select>
+          </div>
+          <div>
+            <label for="starrating" class="form-label">별점:</label>
+            <input type="text" name="starrating" class="form-control" id="starrating" value="{{ review.starrating }}">
+          </div>
+          <div>
+            <label for="runningtime" class="form-label">러닝타임:</label>
+            <input type="text" name="runningtime" class="form-control" id="runningtime" value="{{ review.runningtime }}">
+          </div>
+          <div class="content-container">
+            <label for="content" class="form-label">리뷰:</label>
+            <textarea class="form-control" name="content" id="content" rows="6">{{ review.content }}</textarea>
+          </div>
+          <div>
+            <label for="director" class="form-label">감독:</label>
+            <input type="text" name="director" class="form-control" id="director" value="{{ review.director }}">
+          </div>
+          <div>
+            <label for="actor" class="form-label">배우:</label>
+            <input type="text" name="actor" class="form-control" id="actor" value="{{ review.actor }}">
+          </div>
+          <div class="button-container">
+            <button type="submit" class="btn btn-submit" onclick="location.href='{% url 'review:review_create' %}'">Save</button>
+          </div>
+      </form>
+    </div>
+  </main>
+  <script>
+    function validateForm() {
+      let jenre = document.getElementById('jenre').value;
+      if (jenre === 'none') {
+        alert('장르를 선택해주세요.');
+        return false;  // 폼 제출 차단
+      }
+      return true;  // 폼 제출 허용
+    }
+  </script>
+</body>
+</html>

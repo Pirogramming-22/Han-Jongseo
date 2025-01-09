@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'detail.css' %}">
+  <title>My Movie reviews</title>
+</head>
+<body>
+  <header>
+    <a href="{% url 'review:review' %}" style="text-decoration: none;">
+      my<span style="color: rgb(255, 100, 100);">Movie</span>reviews
+    </a>
+    <a href="{% url 'review:review_create' %}" style="text-decoration: none;">
+      Add a New review
+    </a>
+  </header>
+  <div class="line"></div>
+  <main>
+    <div class="container">
+      <div class="review">
+          <div class="review-header">
+            <h2 class="review-title">{{ review.title }}</h2>
+            <div class="btn-container">
+              <a href="{% url 'review:review_update' review.pk %}">
+                <button class="btn btn-edit">수정</button>
+              </a>
+              <form action="{% url 'review:review_delete' review.pk %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-delete">삭제</button>
+              </form>
+            </div>
+          </div>
+          <div class="review-body">
+            <p class="review-year">
+              <span class="label">개봉년도</span> {{ review.year }}
+            </p>
+            <p class="review-director">
+              <span class="label">감독</span> {{ review.director }}
+            </p>
+            <p class="review-actor">
+              <span class="label">주연</span> {{ review.actor }}
+            </p>
+            <p class="review-jenre">
+              <span class="label">장르</span> {{ review.jenre }}
+            </p>
+            <p class="review-starrating">
+              <span class="label">별점</span> {{ review.starrating }}
+            </p>
+            <p class="review-runningtime">
+              <span class="label">러닝타임</span> {{ review.runningtime }}
+            </p>
+          </div>
+          <div class="review-text-container">
+            <p class="review-text">
+              {{ review.content }}
+            </p>
+          </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
