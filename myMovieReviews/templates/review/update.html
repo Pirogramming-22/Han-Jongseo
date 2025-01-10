@@ -21,7 +21,7 @@
     <div class="form-container">
       <div class="form-title"><span style="color: rgb(255, 100, 100);">Movie</span>review🍿</div>
       <div class="line"></div>
-      <form action="{% url 'review:review_update' review.pk %}" method="post" onsubmit="return validateForm()">
+      <form action="{% url 'review:review_update' review.pk %}" method="post" onsubmit="return validateForm(event)">
           {% csrf_token %}
           <div>
             <label for="title" class="form-label">제목:</label>
@@ -57,7 +57,7 @@
           </div>
           <div>
             <label for="runningtime" class="form-label">러닝타임:</label>
-            <input type="text" name="runningtime" class="form-control" id="runningtime" value="{{ review.runningtime }}">
+            <input type="text" name="runningtime" class="form-control" id="runningtime" value="{{ display_runningtime }}">
           </div>
           <div class="content-container">
             <label for="content" class="form-label">리뷰:</label>
@@ -72,19 +72,20 @@
             <input type="text" name="actor" class="form-control" id="actor" value="{{ review.actor }}">
           </div>
           <div class="button-container">
-            <button type="submit" class="btn btn-submit" onclick="location.href='{% url 'review:review_create' %}'">Save</button>
+            <button type="submit" class="btn btn-submit">Save</button>
           </div>
       </form>
     </div>
   </main>
   <script>
-    function validateForm() {
+    function validateForm(event) {
+      event.preventDefault();
       let jenre = document.getElementById('jenre').value;
       if (jenre === 'none') {
         alert('장르를 선택해주세요.');
         return false;  // 폼 제출 차단
       }
-      return true;  // 폼 제출 허용
+      event.target.submit();  // 폼이 유효한 경우 제출 허용
     }
   </script>
 </body>

@@ -18,6 +18,13 @@
   </header>
   <div class="line"></div>
 
+  <div class="sort-container" style="display: flex; padding: 20px;">
+    <span>정렬 기준:</span>
+    <a href="?sort=title" class="{% if current_sort == 'title' %}active{% endif %}" style="text-decoration: none; margin-left: 10px; margin-right: 10px; font-weight: bold; color: rgb(255, 100, 100);">제목</a>
+    <a href="?sort=starrating" class="{% if current_sort == 'starrating' %}active{% endif %}" style="text-decoration: none; margin-right: 10px; font-weight: bold; color: rgb(255, 100, 100);">별점</a>
+    <a href="?sort=runningtime" class="{% if current_sort == 'runningtime' %}active{% endif %}" style="text-decoration: none; margin-right: 10px; font-weight: bold; color: rgb(255, 100, 100);">러닝타임</a>
+  </div>
+
   <div class="list-container">
     {% for review in reviews %}
       <a href="{% url 'review:review_detail' review.pk %}">
@@ -31,6 +38,9 @@
           </p>
           <p class="list-item-starrating">
             <span class="label">별점</span> {{ review.starrating }}
+          </p>
+          <p class="list-item-runningtime">
+            <span class="label">러닝타임</span> {{ review.display_runningtime }}
           </p>
         </div>
       </a>

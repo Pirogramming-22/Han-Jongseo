@@ -1,10 +1,19 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Review
+from django.db.models import F
 
 def review(request):
-  reviews = Review.objects.all()
-  context = {'reviews':reviews}
+  sort_by = request.GET.get('sort', 'title')
+  valid_sort_options = ['title', 'starrating', 'runningtime']
+  if sort_by not in valid_sort_options: # 유효하지 않은 값은 title로 초기화
+    sort_by = 'title'
+  reviews = Review.objects.order_by(F(sort_by).asc())
+  for review in reviews:
+    review.display_runningtime = review.formatted_runningtime()
+  context = { 'reviews':reviews,
+              'current_sort': sort_by,
+  }
   return render(request, 'review/review.html', context)
 
 def review_create(request):
@@ -22,13 +31,14 @@ def review_create(request):
       director = request.POST['director'],
       actor = request.POST['actor'],
     )
-    return redirect(reverse('review:review_detail', args=[review.pk]))
+    return redirect(reverse('review:review'))
   return render(request, 'review/create.html')
 
 def review_detail(request, pk):
   reviews = Review.objects.get(id=pk)
   context = {
     'review':reviews,
+    'display_runningtime':reviews.formatted_runningtime(),
   }
   return render(request, 'review/detail.html', context)
 
