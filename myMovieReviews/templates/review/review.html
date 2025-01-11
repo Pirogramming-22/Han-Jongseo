@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'review.css' %}">
+  <title>My Movie reviews</title>
+</head>
+<body>
+  <header>
+    <a href="{% url 'review:review' %}" style="text-decoration: none;">
+      my<span style="color: rgb(255, 100, 100);">Movie</span>reviews
+    </a>
+    <a href="{% url 'review:review_create' %}" style="text-decoration: none;">
+      Add a New review
+    </a>
+  </header>
+  <div class="line"></div>
+
+  <div class="sort-container" style="display: flex; padding: 20px;">
+    <span>정렬 기준:</span>
+    <a href="?sort=title" class="{% if current_sort == 'title' %}active{% endif %}" style="text-decoration: none; margin-left: 10px; margin-right: 10px; font-weight: bold; color: rgb(255, 100, 100);">제목</a>
+    <a href="?sort=starrating" class="{% if current_sort == 'starrating' %}active{% endif %}" style="text-decoration: none; margin-right: 10px; font-weight: bold; color: rgb(255, 100, 100);">별점</a>
+    <a href="?sort=runningtime" class="{% if current_sort == 'runningtime' %}active{% endif %}" style="text-decoration: none; margin-right: 10px; font-weight: bold; color: rgb(255, 100, 100);">러닝타임</a>
+  </div>
+
+  <div class="list-container">
+    {% for review in reviews %}
+      <a href="{% url 'review:review_detail' review.pk %}">
+        <div class="list-item">
+          <div class="list-item-title">{{ review.title }}</div>
+          <p class="list-item-year">
+            <span class="label">개봉년도</span> {{ review.year }}
+          </p>
+          <p class="list-item-jenre">
+            <span class="label">장르</span> {{ review.jenre }}
+          </p>
+          <p class="list-item-starrating">
+            <span class="label">별점</span> {{ review.starrating }}
+          </p>
+          <p class="list-item-runningtime">
+            <span class="label">러닝타임</span> {{ review.display_runningtime }}
+          </p>
+        </div>
+      </a>
+    {% empty %}
+    <p>리뷰가 없습니다.</p>
+    {% endfor %}
+  </div>
+
+</body>
+</html>
