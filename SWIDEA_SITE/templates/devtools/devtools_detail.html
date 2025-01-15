@@ -11,6 +11,13 @@
     <h2>{{devtool.name}}</h2>
     <p><br />{{devtool.kind}}</p>
     <div>{{devtool.content}}</div>
+    <div style='width: 100%; height: 1px; background-color: gray; margin-top: 20px;'></div>
+    <div class="detail--idea_list">
+      <p style='font-weight: bold;'>> 만들 수 있는 SW 목록</p>
+      {% for idea in related_ideas %}
+      <p class='idea_title_link'><a href="{% url "ideas:ideas_detail" idea.pk %}">{{idea.title}}</a></p>
+      {% endfor %}
+    </div>
   </div>
 </div>
 <div class="btn-wrapper">

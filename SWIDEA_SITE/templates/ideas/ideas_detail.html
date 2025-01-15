@@ -30,7 +30,12 @@
     <meta name="csrf-token" content="{{ csrf_token }}" />
 
     <p>1) 아이디어 관심도<br />{{idea.interest}}</p>
-    <p>2) 예상 개발 툴<br />{{idea.devtool}}</p>
+    <p class="devtools_detail_link">
+      2) 예상 개발 툴<br /><a
+        href="{% url 'devtools:devtools_detail' idea.devtool.pk %}"
+        >{{ idea.devtool }}</a
+      >
+    </p>
     <p>3) 아이디어 설명<br />{{idea.content}}</p>
   </div>
 </div>

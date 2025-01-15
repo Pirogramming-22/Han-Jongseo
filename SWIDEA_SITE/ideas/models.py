@@ -8,3 +8,6 @@ class Idea(models.Model):
   interest = models.IntegerField('아이디어 관심도', default=0)
   devtool = models.ForeignKey(Devtool, null=True, on_delete=models.CASCADE, verbose_name='예상 개발툴')
   IdeaStar = models.BooleanField('찜하기', default=False)
+
+  def __str__(self):
+    return self.title

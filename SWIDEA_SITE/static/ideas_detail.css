@@ -35,6 +35,13 @@
   color: aliceblue;
 }
 
+.devtools_detail_link > a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
 .btn-wrapper {
   display: flex;
   justify-content: center;

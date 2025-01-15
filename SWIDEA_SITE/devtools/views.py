@@ -26,8 +26,10 @@ def devtools_create(request):
 
 def devtools_detail(request, pk):
   devtools = Devtool.objects.get(id=pk)
+  related_ideas = devtools.idea_set.all()
   context = {
-    'devtool': devtools
+    'devtool': devtools,
+    'related_ideas': related_ideas,
   }
   return render(request, 'devtools/devtools_detail.html', context)
 
