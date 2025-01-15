@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.core.paginator import Paginator
 from .models import Idea
 from .forms import IdeaForm
@@ -47,4 +48,4 @@ def ideas_update(request, pk):
     form = IdeaForm(request.POST, request.FILES, instance=idea)
     if form.is_valid():
       form.save()
-    return redirect(f'/ideas/ideas_detail/{pk}', pk)
+    return redirect(reverse('ideas:ideas_detail', kwargs={'pk': pk}))

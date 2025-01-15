@@ -6,18 +6,20 @@
   아이디어 세부내용 페이지입니다. 당신이 구현하려 한 아이디어들을 자세히
   살펴보세요.
 </div>
-<div>
+<div class="content-wrapper">
   {% if idea.image.url != '' %}
   <img src="{{ idea.image.url }}" alt="제품 이미지" />
   {% else %}
   <img src="{% static 'no_img.png' %}" alt="대체 텍스트" />
   {% endif %}
-  <h2>{{idea.title}}</h2>
-  <p>1) 아이디어 관심도<br />{{idea.interest}}</p>
-  <p>2) 예상 개발 툴<br />{{idea.devtool}}</p>
-  <p>3) 아이디어 설명<br />{{idea.content}}</p>
+  <div class="info">
+    <h2>{{idea.title}}</h2>
+    <p>1) 아이디어 관심도<br />{{idea.interest}}</p>
+    <p>2) 예상 개발 툴<br />{{idea.devtool}}</p>
+    <p>3) 아이디어 설명<br />{{idea.content}}</p>
+  </div>
 </div>
-<div>
+<div class="btn-wrapper">
   <a href="{% url 'ideas:ideas_delete' idea.pk %}" class="btn btn-delete"
     >삭제</a
   >

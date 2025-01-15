@@ -16,6 +16,45 @@
   color: white;
 }
 
+form {
+  padding: 0 420px;
+  margin-top: 50px;
+}
+
+form p {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  color: white;
+  font-size: 15px;
+}
+
+form input,
+form textarea,
+form button {
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  outline: none;
+  width: 220px;
+}
+
+#id_content {
+  width: 450px;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: black;
+}
+
+#id_devtool {
+  width: 80px;
+}
+
 .btn-submit {
   width: 150px;
   padding: 5px;
