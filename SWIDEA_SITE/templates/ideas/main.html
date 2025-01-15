@@ -58,44 +58,27 @@
 </div>
 {% endblock %}
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const IdeaStarButtons = document.querySelectorAll(".btn_IdeaStar");
-
-    IdeaStarButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        const ideaId = this.dataset.id;
-        const url = `/ideas/${ideaId}/toggle_IdeaStar/`;
-
-        fetch(url, {
-          method: "POST",
-          headers: {
-            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
-              .value,
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            if (data.is_IdeaStar) {
-              button.innerText = "★"; // 찜하기 상태
-              button.dataset.IdeaStar = "IdeaStar";
-            } else {
-              button.innerText = "☆"; // 찜하기 해제 상태
-              button.dataset.IdeaStar = "not-IdeaStar";
-            }
-          })
-          .catch((error) => {
-            console.error(
-              "There was a problem with the fetch operation:",
-              error
-            );
-          });
+  function IdeaStartoggle(btn, id) {
+    fetch(`/${id}/IdeaStar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": document.querySelector('meta[name="csrf-token"]')
+          .content,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
+        return response.json(); // JSON 파싱
+      })
+      .then((data) => {
+        if (data["IdeaStar"]) btn.classList.add("IdeaStar");
+        else btn.classList.remove("IdeaStar");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
-    });
-  });
+  }
 </script>

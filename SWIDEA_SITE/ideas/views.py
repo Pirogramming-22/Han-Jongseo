@@ -54,11 +54,10 @@ def ideas_update(request, pk):
       form.save()
     return redirect(reverse('ideas:ideas_detail', kwargs={'pk': pk}))
 
-@csrf_exempt
-def toggle_IdeaStar(request, idea_id):
+def toggle_IdeaStar(request, pk):
   if request.method == "POST":
-    idea = get_object_or_404(Idea, id=idea_id)
-    idea.is_IdeaStar = not idea.is_IdeaStar
+    idea = Idea.objects.get(id=pk)
+    idea.IdeaStar = not idea.IdeaStar
     idea.save()
-    return JsonResponse({"is_IdeaStar": idea.is_IdeaStar})
-  return JsonResponse({"error": "Invalid request"}, status=400)
+    return JsonResponse({'IdeaStar': idea.IdeaStar})
+  return JsonResponse({'error': "error"})

@@ -14,6 +14,21 @@
   {% endif %}
   <div class="info">
     <h2>{{idea.title}}</h2>
+
+    {% if idea.IdeaStar %}
+    <button
+      class="IdeaStar-btn IdeaStar"
+      onclick="IdeaStarToggle(this, {{idea.id}})"
+    >
+      ★
+    </button>
+    {% else %}
+    <button class="IdeaStar-btn" onclick="IdeaStarToggle(this, {{idea.id}})">
+      ★
+    </button>
+    {% endif %}
+    <meta name="csrf-token" content="{{ csrf_token }}" />
+
     <p>1) 아이디어 관심도<br />{{idea.interest}}</p>
     <p>2) 예상 개발 툴<br />{{idea.devtool}}</p>
     <p>3) 아이디어 설명<br />{{idea.content}}</p>
