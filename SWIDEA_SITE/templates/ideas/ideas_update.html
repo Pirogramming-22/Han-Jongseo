@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% load static %} {% block extra_styles %}
+<link rel="stylesheet" href="{% static 'ideas_update.css' %}" />
+{% endblock %} {% block content %}
+<div class="form-title">
+  <span style="color: #a4ffa4">Idea Detail Update</span>
+</div>
+<div class="head-text">
+  아이디어 세부내용 수정 페이지입니다. 아이디어를 구체화하거나 내용을 변경해
+  보아요.
+</div>
+<form
+  action="{% url 'ideas:ideas_update' pk %}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  {%csrf_token%} {{form.as_p}}
+  <button type="submit" class="btn btn-submit">SUBMIT</button>
+</form>
+{%endblock%}

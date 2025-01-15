@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% load static %} {% block extra_styles %}
+<link rel="stylesheet" href="{% static 'ideas_create.css' %}" />
+{% endblock %} {% block content %}
+<div class="form-title"><span style="color: #a4ffa4">Idea Register</span></div>
+<div class="head-text">
+  아이디어 등록 페이지입니다. 당신의 아이디어를 잊지 말고 기록하세요!
+</div>
+<form
+  action="{% url 'ideas:ideas_create' %}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  {%csrf_token%} {{form.as_p}}
+  <button type="submit" class="btn btn-submit">SUBMIT</button>
+</form>
+{% endblock %}
