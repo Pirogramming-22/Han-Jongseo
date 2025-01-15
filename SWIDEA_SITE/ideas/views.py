@@ -54,10 +54,10 @@ def ideas_update(request, pk):
       form.save()
     return redirect(reverse('ideas:ideas_detail', kwargs={'pk': pk}))
 
-def toggle_IdeaStar(request, pk):
-  if request.method == "POST":
+def IdeaStarToggle(request, pk):
+  if request.method == 'POST':
     idea = Idea.objects.get(id=pk)
     idea.IdeaStar = not idea.IdeaStar
     idea.save()
     return JsonResponse({'IdeaStar': idea.IdeaStar})
-  return JsonResponse({'error': "error"})
+  return JsonResponse({'error': 'error'})

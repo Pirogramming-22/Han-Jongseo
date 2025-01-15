@@ -9,5 +9,5 @@ urlpatterns = [
   path('ideas_detail/<int:pk>', ideas_detail, name='ideas_detail'),
   path('ideas_delete/<int:pk>', ideas_delete, name='ideas_delete'),
   path('ideas_update/<int:pk>', ideas_update, name='ideas_update'),
-  path('<int:pk>/toggle_IdeaStar', toggle_IdeaStar, name='toggle_IdeaStar'),
+  path('<int:pk>/IdeaStar', IdeaStarToggle, name='ideas_IdeaStarToggle'),
 ]

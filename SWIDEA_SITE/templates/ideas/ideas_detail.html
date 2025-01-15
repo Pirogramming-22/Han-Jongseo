@@ -48,4 +48,29 @@
     >수정</a
   >
 </div>
-{% endblock content %}
+{% endblock %}
+<script>
+  function IdeaStarToggle(btn, id) {
+    fetch(`/${id}/IdeaStar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": document.querySelector('meta[name="csrf-token"]')
+          .content,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
+        return response.json(); // JSON 파싱
+      })
+      .then((data) => {
+        if (data["IdeaStar"]) btn.classList.add("IdeaStar");
+        else btn.classList.remove("IdeaStar");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+</script>
