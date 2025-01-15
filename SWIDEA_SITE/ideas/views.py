@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import Idea
 from .forms import IdeaForm
 
@@ -10,7 +12,6 @@ def main(request):
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   ctx = {
-    
     'page_obj': page_obj,
   }
   return render(request, 'ideas/main.html', context=ctx)
@@ -19,12 +20,15 @@ def ideas_create(request):
   if request.method == 'GET':
     form = IdeaForm()
     ctx = {'form': form}
-    return render(request, 'ideas/ideas_create.html', context = ctx)
+    return render(request, 'ideas/ideas_create.html', context=ctx)
   else:
     form = IdeaForm(request.POST, request.FILES)
     if form.is_valid():
-      form.save()
-    return redirect('/')
+      new_idea = form.save()
+      return redirect(reverse('ideas:ideas_detail', kwargs={'pk': new_idea.id}))
+    else:
+      ctx = {'form': form}
+      return render(request, 'ideas/ideas_create.html', context=ctx)
 
 def ideas_detail(request, pk):
   target_idea = Idea.objects.get(id=pk)
@@ -49,3 +53,12 @@ def ideas_update(request, pk):
     if form.is_valid():
       form.save()
     return redirect(reverse('ideas:ideas_detail', kwargs={'pk': pk}))
+
+@csrf_exempt
+def toggle_IdeaStar(request, idea_id):
+  if request.method == "POST":
+    idea = get_object_or_404(Idea, id=idea_id)
+    idea.is_IdeaStar = not idea.is_IdeaStar
+    idea.save()
+    return JsonResponse({"is_IdeaStar": idea.is_IdeaStar})
+  return JsonResponse({"error": "Invalid request"}, status=400)

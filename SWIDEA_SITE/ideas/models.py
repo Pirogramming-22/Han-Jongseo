@@ -6,3 +6,4 @@ class Idea(models.Model):
   content = models.TextField('아이디어 설명')
   interest = models.IntegerField('아이디어 관심도', default=0)
   devtool = models.TextField('예상 개발툴')
+  IdeaStar = models.BooleanField('찜하기', default=False)

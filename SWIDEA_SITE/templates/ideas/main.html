@@ -6,11 +6,22 @@
 <div class="content-wrapper">
   {% for idea in page_obj.object_list %}
   <div class="item">
-    {% if idea.image != null and idea.image.url != "" %}
-    <img src="{{ idea.image.url }}" alt="대체 텍스트" />
-    {% else %}
-    <img src="{% static 'no_img.png' %}" alt="대체 텍스트" />
-    {% endif %}
+    <div class="image-container">
+      {% if idea.image != null and idea.image.url != "" %}
+      <img src="{{ idea.image.url }}" alt="대체 텍스트" />
+      {% else %}
+      <img src="{% static 'no_img.png' %}" alt="대체 텍스트" />
+      {% endif %}
+      <div class="IdeaStar-icon">
+        <button
+          class="btn_IdeaStar"
+          data-id="{{ idea.id }}"
+          data-IdeaStar="{{ idea.is_IdeaStar|yesno:'IdeaStar,not-IdeaStar' }}"
+        >
+          {% if idea.is_IdeaStar %} ★ {% else %} ☆ {% endif %}
+        </button>
+      </div>
+    </div>
     <div class="info">
       <a class="title" href="{% url 'ideas:ideas_detail' idea.pk %}"
         >{{idea.title}}</a
@@ -27,6 +38,9 @@
   </div>
   {% endfor %}
 </div>
+
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+
 <div class="pagination">
   <span class="step-links">
     {% if page_obj.has_previous %}
@@ -43,3 +57,45 @@
   </span>
 </div>
 {% endblock %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const IdeaStarButtons = document.querySelectorAll(".btn_IdeaStar");
+
+    IdeaStarButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const ideaId = this.dataset.id;
+        const url = `/ideas/${ideaId}/toggle_IdeaStar/`;
+
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+              .value,
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.is_IdeaStar) {
+              button.innerText = "★"; // 찜하기 상태
+              button.dataset.IdeaStar = "IdeaStar";
+            } else {
+              button.innerText = "☆"; // 찜하기 해제 상태
+              button.dataset.IdeaStar = "not-IdeaStar";
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+      });
+    });
+  });
+</script>

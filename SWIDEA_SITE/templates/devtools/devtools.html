@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% load static %} {% block extra_styles %}
+<link rel="stylesheet" href="{% static 'devtools.css' %}" />
+{% endblock %} {% block content %}
+<div class="form-title"><span style="color: #a4ffa4">DevTool List</span></div>
+<div class="head-text">
+  개발툴 목록 페이지입니다. 자신이 사용가능한 개발툴의 목록을 확인해보세요.
+</div>
+<div class="content-wrapper">
+  {% for devtool in page_obj.object_list %}
+  <div class="item">
+    <div class="info">
+      <a class="name" href="{% url 'devtools:devtools_detail' devtool.pk %}"
+        >{{devtool.name}}</a
+      >
+      <div class="kind">{{devtool.kind}}</div>
+      <div class="devtool_content">{{devtool.content}}</div>
+    </div>
+  </div>
+  <hr />
+  {% endfor %}
+</div>
+
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">&laquo; 처음</a>
+    <a href="?page={{ page_obj.previous_page_number }}">이전</a>
+    {% endif %}
+    <span class="current">
+      페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+    </span>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">다음</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">끝 &raquo;</a>
+    {% endif %}
+  </span>
+</div>
+
+{% endblock %}

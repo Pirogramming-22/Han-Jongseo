@@ -3,7 +3,7 @@ from .models import Idea
 
 class IdeaForm(forms.ModelForm):
   class Meta:
-    model= Idea
+    model = Idea
     fields = ('__all__')
     widgets = {
             'devtool': forms.Select(
