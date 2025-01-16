@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% load static %} {% block extra_styles %}
+<link rel="stylesheet" href="{% static 'devtools_update.css' %}" />
+{% endblock %} {% block content %}
+<div class="form-title">
+  <span style="color: #a4ffa4">DevTool Detail Update</span>
+</div>
+<div class="head-text">
+  개발툴 세부내용 수정 페이지입니다. 개발툴에 대해 수정사항이 있으면 고쳐보아요.
+</div>
+<form action="{% url 'devtools:devtools_update' pk %}" method="post">
+  {%csrf_token%} {{form.as_p}}
+  <button type="submit" class="btn btn-submit">SUBMIT</button>
+</form>
+{%endblock%}

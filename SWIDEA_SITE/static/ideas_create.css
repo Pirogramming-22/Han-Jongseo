@@ -1,0 +1,71 @@
+.form-title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.head-text {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+form {
+  padding: 0 420px;
+  margin-top: 50px;
+}
+
+form p {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  color: white;
+  font-size: 15px;
+}
+
+form input,
+form textarea,
+form button {
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  outline: none;
+  width: 220px;
+}
+
+#id_content {
+  width: 450px;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: black;
+}
+
+#id_devtool {
+  width: 80px;
+}
+
+.btn-submit {
+  width: 150px;
+  padding: 5px;
+  margin: 20px 125px;
+  border-radius: 10px;
+  border-color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}

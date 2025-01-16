@@ -1,0 +1,84 @@
+{% extends 'base.html' %} {% load static %} {% block extra_styles %}
+<link rel="stylesheet" href="{% static 'main.css' %}" />
+{% endblock %} {% block content %}
+<div class="form-title"><span style="color: #a4ffa4">Idea List</span></div>
+<div class="head-text">나의 아이디어를 잊지 말고 기록해보세요</div>
+<div class="content-wrapper">
+  {% for idea in page_obj.object_list %}
+  <div class="item">
+    <div class="image-container">
+      {% if idea.image != null and idea.image.url != "" %}
+      <img src="{{ idea.image.url }}" alt="대체 텍스트" />
+      {% else %}
+      <img src="{% static 'no_img.png' %}" alt="대체 텍스트" />
+      {% endif %}
+      <div class="IdeaStar-icon">
+        <button
+          class="btn_IdeaStar"
+          data-id="{{ idea.id }}"
+          data-IdeaStar="{{ idea.is_IdeaStar|yesno:'IdeaStar,not-IdeaStar' }}"
+        >
+          {% if idea.is_IdeaStar %} ★ {% else %} ☆ {% endif %}
+        </button>
+      </div>
+    </div>
+    <div class="info">
+      <a class="title" href="{% url 'ideas:ideas_detail' idea.pk %}"
+        >{{idea.title}}</a
+      >
+      <div class="item-line"></div>
+      <p class="devtool">예상 개발 툴: {{idea.devtool}}</p>
+      <p class="interest">
+        아이디어 관심도:
+        <button class="btn_interest btn_plus">+</button>
+        {{idea.interest}}
+        <button class="btn_interest btn_minus">-</button>
+      </p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">&laquo; 처음</a>
+    <a href="?page={{ page_obj.previous_page_number }}">이전</a>
+    {% endif %}
+    <span class="current">
+      페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+    </span>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">다음</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">끝 &raquo;</a>
+    {% endif %}
+  </span>
+</div>
+{% endblock %}
+<script>
+  function IdeaStarToggle(btn, id) {
+    fetch(`/${id}/IdeaStar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": document.querySelector('meta[name="csrf-token"]')
+          .content,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
+        return response.json(); // JSON 파싱
+      })
+      .then((data) => {
+        if (data["IdeaStar"]) btn.classList.add("IdeaStar");
+        else btn.classList.remove("IdeaStar");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+</script>

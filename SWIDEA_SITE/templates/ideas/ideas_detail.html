@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% load static %} {% block extra_styles %}
+<link rel="stylesheet" href="{% static 'ideas_detail.css' %}" />
+{% endblock %} {% block content %}
+<div class="form-title"><span style="color: #a4ffa4">Idea Detail</span></div>
+<div class="head-text">
+  아이디어 세부내용 페이지입니다. 당신이 구현하려 한 아이디어들을 자세히
+  살펴보세요.
+</div>
+<div class="content-wrapper">
+  {% if idea.image.url != '' %}
+  <img src="{{ idea.image.url }}" alt="제품 이미지" />
+  {% else %}
+  <img src="{% static 'no_img.png' %}" alt="대체 텍스트" />
+  {% endif %}
+  <div class="info">
+    <h2>{{idea.title}}</h2>
+
+    {% if idea.IdeaStar %}
+    <button
+      class="IdeaStar-btn IdeaStar"
+      onclick="IdeaStarToggle(this, {{idea.id}})"
+    >
+      ★
+    </button>
+    {% else %}
+    <button class="IdeaStar-btn" onclick="IdeaStarToggle(this, {{idea.id}})">
+      ★
+    </button>
+    {% endif %}
+    <meta name="csrf-token" content="{{ csrf_token }}" />
+
+    <p>1) 아이디어 관심도<br />{{idea.interest}}</p>
+    <p class="devtools_detail_link">
+      2) 예상 개발 툴<br /><a
+        href="{% url 'devtools:devtools_detail' idea.devtool.pk %}"
+        >{{ idea.devtool }}</a
+      >
+    </p>
+    <p>3) 아이디어 설명<br />{{idea.content}}</p>
+  </div>
+</div>
+<div class="btn-wrapper">
+  <a href="{% url 'ideas:ideas_delete' idea.pk %}" class="btn btn-delete"
+    >삭제</a
+  >
+  <a href="{% url 'ideas:main' %}" class="btn btn-main">목록</a>
+  <a href="{% url 'ideas:ideas_update' idea.pk %}" class="btn btn-update"
+    >수정</a
+  >
+</div>
+{% endblock %}
+<script>
+  function IdeaStarToggle(btn, id) {
+    fetch(`/${id}/IdeaStar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": document.querySelector('meta[name="csrf-token"]')
+          .content,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
+        return response.json(); // JSON 파싱
+      })
+      .then((data) => {
+        if (data["IdeaStar"]) btn.classList.add("IdeaStar");
+        else btn.classList.remove("IdeaStar");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+</script>

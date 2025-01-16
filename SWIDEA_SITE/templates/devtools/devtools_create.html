@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% load static %} {% block extra_styles %}
+<link rel="stylesheet" href="{% static 'devtools_create.css' %}" />
+{% endblock %} {% block content %}
+<div class="form-title">
+  <span style="color: #a4ffa4">DevTool Register</span>
+</div>
+<div class="head-text">
+  개발툴 등록 페이지입니다. 자신이 다룰 수 있는 개발툴을 등록해보세요.
+</div>
+<form action="{% url 'devtools:devtools_create' %}" method="post">
+  {% csrf_token %}
+  <p>
+    <label for="name" class="form-label">이름:</label>
+  </p>
+  <p>
+    <input type="text" name="name" class="form-control" id="name" />
+  </p>
+  <p>
+    <label for="kind" class="form-label">종류:</label>
+  </p>
+  <p>
+    <input type="text" name="kind" class="form-control" id="kind" />
+  </p>
+  <p>
+    <label for="content" class="form-label">개발툴 설명:</label>
+  </p>
+  <p>
+    <textarea
+      class="form-control"
+      name="content"
+      id="content"
+      rows="6"
+    ></textarea>
+  </p>
+  <button type="submit" class="btn btn-submit">SUBMIT</button>
+</form>
+{% endblock %}
