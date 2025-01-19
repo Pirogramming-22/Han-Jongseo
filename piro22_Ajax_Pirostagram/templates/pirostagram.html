@@ -1,11 +1,115 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pirostagram</title>
+  <link rel="stylesheet" href="{% static 'reset.css' %}">
+  <link rel="stylesheet" href="{% static 'pirostagram.css' %}">
+  <title>Pirostagram</title>
 </head>
 <body>
-  <p>pirostagram</p>
+  <div class="container">
+    <header class="header">
+      <button>
+        <img src="../static/goBack.svg" alt="뒤로 가기 버튼">
+      </button>
+      <div class="header__username">Pirogramming</div>
+      <div class="header__rightButtons">
+        <button><img src="../static/alarm.svg" alt="알림 버튼"></button>
+        <button><img src="../static/more.svg" alt="더보기 버튼"></button>
+      </div>
+    </header>
+  <main>
+    <section class="profile">
+      <div class="profile__image">
+        <img src="../static/profilePicture.png" alt="프로필 사진" />
+      </div>
+      <div class="profile__data">
+        <div class="profile__data-item">
+          <div class="profile__data-number">1,234</div>
+          <div class="profile__data-type">Posts</div>
+        </div>
+        <div class="profile__data-item">
+          <div class="profile__data-number">5,678</div>
+          <div class="profile__data-type">Followers</div>
+        </div>
+        <div class="profile__data-item">
+          <div class="profile__data-number">9,101</div>
+          <div class="profile__data-type">Following</div>
+        </div>
+      </div>
+    </section>
+    <section class="userInfo">
+      <div>
+        <div class="userInfo__username">Pirogramming</div>
+        <div class="userInfo__category">컴퓨터 회사</div>
+        <div class="userInfo__description">프로그래밍의 첫 걸음, 피로그래밍</div>
+      </div>
+      <button class="userInfo__follow">Follow</button>
+    </section>
+    <aside class="highlights">
+      <div class="highlights__item">
+        <button class="highlights__item-image">
+          <img src="../static/profilePicture.png">
+        </button>
+        <div class="highlights__item-title">Text here</div>
+      </div>
+      <div class="highlights__item">
+        <button class="highlights__item-image">
+          <img src="../static/profilePicture.png">
+        </button>
+        <div class="highlights__item-title">Text here</div>
+      </div>
+      <div class="highlights__item">
+        <button class="highlights__item-image">
+          <img src="../static/profilePicture.png">
+        </button>
+        <div class="highlights__item-title">Text here</div>
+      </div>
+      <div class="highlights__item">
+        <button class="highlights__item-image">
+          <img src="../static/profilePicture.png">
+        </button>
+        <div class="highlights__item-title">Text here</div>
+      </div>
+      <div class="highlights__item">
+        <button class="highlights__item-image">
+          <img src="../static/profilePicture.png">
+        </button>
+        <div class="highlights__item-title">Text here</div>
+      </div>
+      <div class="highlights__item">
+        <button class="highlights__item-image">
+          <img src="../static/profilePicture.png">
+        </button>
+        <div class="highlights__item-title">Text here</div>
+      </div>
+    </aside>
+    <section class="posts">
+      <nav class="posts__tabBar">
+        <div class="posts__tab posts__tab--selected">1</div>
+        <div class="posts__tab">2</div>
+        <div class="posts__tab">3</div>
+      </nav>
+      <article class="posts__contents">
+        {% for post in posts %}
+          <div class="posts__photo card post__container post-id-{{ post.id }}">
+            <a href="{% url 'pirostagrams:post' post.id %}">
+              <img src="{% static 'img_lights.jpg' %}" alt="...">
+            </a>
+          </div>
+        {% endfor %}
+      </article>
+    </section>
+  </main>
+  <footer>
+    <button class="navBar">1</button>
+    <button class="navBar">2</button>
+    <button class="navBar">3</button>
+    <button class="navBar">4</button>
+    <button class="navBar navBar--selected">5</button>
+  </footer>
+  </div>
 </body>
 </html>

@@ -1,0 +1,103 @@
+:root {
+  /* spacing */
+  --gutter: 20px;
+  --padding: 16px;
+  --padding-sm: 10px;
+
+  /* fontsize */
+  --heading: 1.6rem;
+  --body: 1.4rem;
+
+  /* color */
+  --blue: #1fa1ff;
+  --gray: #c4c4c4;
+}
+
+.container {
+  width: 390px;
+  height: 100dvh;
+  margin: auto;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding) var(--gutter);
+}
+
+.header__username {
+  font-size: var(--heading);
+}
+
+.header__rightButtons {
+  display: flex;
+  gap: var(--padding);
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--padding);
+}
+
+.comments-section {
+  margin-top: 2rem;
+}
+
+.comments-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #343a40;
+  margin-bottom: 1rem;
+}
+
+
+.comment-card {
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+}
+
+.comment-card .card-body {
+  font-size: 0.95rem;
+  color: #495057;
+}
+
+.comment-date {
+  font-size: 0.8rem;
+  color: #868e96;
+  margin-top: 0.25rem;
+}
+
+.comment-form {
+  margin-top: 2rem;
+}
+
+.comment-form textarea {
+  border-radius: 8px;
+  resize: none;
+}
+
+.submit-btn {
+  border: none;
+  border-radius: 8px;
+  background-color: #20c997;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #17a589;
+}
