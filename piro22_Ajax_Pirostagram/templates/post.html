@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'reset.css' %}">
+  <link rel="stylesheet" href="{% static 'post.css' %}">
+  <title>Pirostagram</title>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <button>
+        <img src="../static/goBack.svg" alt="뒤로 가기 버튼">
+      </button>
+      <div class="header__username">Pirogramming</div>
+      <div class="header__rightButtons">
+        <button><img src="../static/alarm.svg" alt="알림 버튼"></button>
+        <button><img src="../static/more.svg" alt="더보기 버튼"></button>
+      </div>
+    </header>
+    <main>
+      <section class="post">
+        <div class="card post__container post-id-{{ post.id }}">
+          <div class="card-body">
+              <div class="post__img">
+                  <img src="{% static 'img_lights.jpg' %}" alt="..." style="width:100%">
+              </div>
+              <div class="card-text">{{ post.content }}</div>
+              <div class="btn btn-primary post__like" style="width: 35px; margin-top: 10px; background-color: gray; cursor: pointer;" onclick="onClickLike({{ post.id }}, 'like')">Like {{ post.like }}</div>
+          </div>
+          
+          <div class="comments-section">
+            <div class="comments-title" style="margin-top: 20px;"><댓글></div>
+            {% for comments in comment %}
+                <div class="comment-card">
+                    <div class="comment-card-body">
+                        <div style="margin-top: 10px; margin-left: 10px; color: black;">{{ comments.content }}</div>
+                        <div class="comment-date">{{ comments.created_at }}</div>
+                    </div>
+                    <form
+                    action="{% url 'comments:comment_delete' comments.pk %}"
+                    class="mb-0"
+                    method="post">
+                            {% csrf_token %}
+                        <button
+                            type="submit"
+                            class="btn btn-outline-danger btn-sm delete-btn"
+                            style="font-size: 10px; margin-left: 10px;"
+                        >
+                            댓글 삭제
+                        </button>
+                    </form>
+                </div>
+                {% empty %}
+                    <p>댓글이 없습니다</p>
+                {% endfor %}
+          </div>
+
+          <form class="comment-form" action="{% url 'comments:comment_create' post.id %}" method="post">
+              {% csrf_token %}
+              <textarea
+                      class="form-control"
+                      rows="4"
+                      name="content"
+                      placeholder="댓글을 입력하세요"
+              ></textarea>
+              <br><button type="submit" class="submit-btn">댓글 작성</button>
+          </form>
+
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+      const onClickLike = async(id, type) => {
+          const url = "/like_ajax/";
+          const { data } = await axios.post(url, {
+              id,
+              type,
+          });
+          likeHandResponse(data.id, data.type);
+      }
+  
+      const likeHandResponse = (id, type) => {
+          const element = document.querySelector(`.post-id-${id} .post__${type}`);
+          const originHTML = element.innerHTML;
+          const [buttonType, num] = originHTML.split(" ");
+          const count = Number(num) + 1;
+  
+          element.innerHTML = `${buttonType} ${count}`;
+      }
+  </script>
+</body>
+</html>
